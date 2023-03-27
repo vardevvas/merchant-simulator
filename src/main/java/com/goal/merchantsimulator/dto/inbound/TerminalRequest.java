@@ -12,8 +12,11 @@ import lombok.ToString;
 @ToString
 public class TerminalRequest {
 
-    @JsonProperty("application_name")
+    @JsonProperty("client_id")
     private Long clientId;
+
+    @JsonProperty("systemTraceAuditNumber")
+    private Long systemTraceAuditNumber;
 
     @JsonProperty("notes")
     private String notes;

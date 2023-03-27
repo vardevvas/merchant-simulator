@@ -9,7 +9,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface EbsMapper {
-
+    void purchaseMapper(PurchaseRequest purchaseRequest, @MappingTarget PurchaseResponse purchaseResponse);
+//
 //    void publicKeyMapper(GetPublicKeyRequest getPublicKeyRequest, @MappingTarget GetPublicKeyResponse getPublicKeyResponse);
 //
 //    void registrationMapper(RegisterRequest registerRequest, @MappingTarget RegisterResponse registerResponse);

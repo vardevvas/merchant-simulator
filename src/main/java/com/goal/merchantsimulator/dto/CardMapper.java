@@ -1,7 +1,7 @@
 package com.goal.merchantsimulator.dto;
 
-import com.goal.consumersimulator.dto.inbound.CardRequest;
-import com.goal.consumersimulator.model.Card;
+import com.goal.merchantsimulator.dto.inbound.CardRequest;
+import com.goal.merchantsimulator.model.Card;
 
 public class CardMapper {
 
