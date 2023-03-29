@@ -10,4 +10,8 @@ import java.util.Optional;
 public interface TerminalRepo extends JpaRepository<Terminal, Long> {
 
     Optional<Terminal> findByClientId(Long clientId);
+
+    Optional<Terminal> findByTerminalId(Long terminalId);
+
+    Optional<Terminal> findBySystemTraceAuditNumber(Long systemTraceAuditNumber);
 }

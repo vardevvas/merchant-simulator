@@ -1,24 +1,14 @@
 package com.goal.merchantsimulator.dto.outbound;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.util.Date;
+import javax.validation.constraints.Size;
 
-@RequiredArgsConstructor
-@AllArgsConstructor
-@Data
-@ToString
-public class PurchaseResponse extends GeneralResponse {
+public class PurchaseMobileResponse extends GeneralResponse {
 
-    @JsonProperty("pan")
-    private String pan;
+    @JsonProperty("mobileNo")
+    private String mobileNo;
 
     @JsonProperty("tranCurrencyCode")
     private String tranCurrencyCode;

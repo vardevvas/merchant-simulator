@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 
-@RequestMapping("/consumer")
+@RequestMapping("/merchant")
 @RestController
 @CrossOrigin()
 @RequiredArgsConstructor
@@ -22,9 +22,21 @@ public class SimulatorController {
 
     final private EbsServices ebsServices;
 
-    @PostMapping(path = "/register")
-    public ResponseEntity<PurchaseResponse> register(@Validated @RequestBody PurchaseRequest purchaseRequest) {
+    @PostMapping("/purchase")
+    public ResponseEntity<PurchaseResponse> purchase(@Validated @RequestBody PurchaseRequest purchaseRequest) {
         return new ResponseEntity<>(ebsServices.purchase(purchaseRequest), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/purchaseMobile")
+    public ResponseEntity<PurchaseMobileResponse> purchaseMobile(@Validated @RequestBody PurchaseMobileRequest purchaseMobileRequest) {
+        return new ResponseEntity<>(ebsServices.purchaseMobile(purchaseMobileRequest), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/purchaseWithCashBack")
+    public ResponseEntity<PurchaseWithCashBackResponse> purchaseWithCashBack(@Validated @RequestBody PurchaseWithCashBackRequest purchaseWithCashBackRequest) {
+        return new ResponseEntity<>(ebsServices.purchaseWithCashBack(purchaseWithCashBackRequest), HttpStatus.OK);
 
     }
 

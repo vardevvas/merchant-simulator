@@ -6,9 +6,11 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.context.annotation.Bean;
 
 @Mapper(componentModel = "spring")
 public interface EbsMapper {
+//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void purchaseMapper(PurchaseRequest purchaseRequest, @MappingTarget PurchaseResponse purchaseResponse);
 //
 //    void publicKeyMapper(GetPublicKeyRequest getPublicKeyRequest, @MappingTarget GetPublicKeyResponse getPublicKeyResponse);

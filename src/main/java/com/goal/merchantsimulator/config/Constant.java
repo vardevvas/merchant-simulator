@@ -1,12 +1,80 @@
 package com.goal.merchantsimulator.config;
+
+import com.goal.merchantsimulator.dto.outbound.GeneralResponse;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Constant {
 
+//    public GeneralResponse setResponse(GeneralResponse generalResponse, String response) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+//        Class res = Class.forName(response);
+//        Object fasdfa = res.newInstance();
+////        ResponseCode asdfasdf =  (ResponseCode) res.getDeclaredConstructor().newInstance();
+////        res.getDeclaredConstructor().newInstance();
+//        generalResponse.setResponseCode(ResponseCode.fasdfa.code);
+//        generalResponse.setResponseMessage(ResponseCode.asdfasdf.msg);
+//        generalResponse.setResponseStatus(ResponseCode.response.status);
+//        return generalResponse;
+//    }
+        
     public static class ResponseCode {
+//        public class DefaultClass {
+//            private int code;
+//            private String msg;
+//            private String status;
+//
+//            public DefaultClass(int code, String msg, String status) {
+//                this.code = code;
+//                this.msg = msg;
+//                this.status = status;
+//            }
+//
+//            public int getCode() {
+//                return code;
+//            }
+//
+//            public String getMsg() {
+//                return msg;
+//            }
+//
+//            public String getStatus() {
+//                return status;
+//            }
+//        }
+
 
         public static class Success {
             public static final int code = 0;
             public static final String msg = "Approved";
             public static final String status = "Successful";
+
+        }
+
+        public static class InvalidClientId {
+            public static final int code = 600;
+            public static final String msg = "Invalid System Trace Audit Number";
+        }
+
+        public static class InvalidTerminalId {
+            public static final int code = 389;
+            public static final String msg = "Invalid System Trace Audit Number";
+        }
+
+        public static class InvalidSystemTraceAuditNumber {
+            public static final int code = 606;
+            public static final String msg = "Invalid System Trace Audit Number";
+        }
+
+        public static class InvalidPin {
+            public static final int code = 355;
+            public static final String msg = "Invalid PIN";
+        }
+
+        public static class PinLimitTriesWasReached {
+            public static final int code = 375;
+            public static final String msg = "PIN tries limit was reached";
         }
 
         public static class AccountNumber {
@@ -75,11 +143,6 @@ public class Constant {
             public static final String msg = "Invalid card";
         }
 
-        public static class InvalidPin {
-            public static final int code = 53;
-            public static final String msg = "Invalid PIN";
-        }
-
         public static class SystemError {
             public static final int code = 54;
             public static final String msg = "System error";
@@ -118,11 +181,6 @@ public class Constant {
         public static class WithdrawalLimitWouldBeExceeded {
             public static final int code = 61;
             public static final String msg = "Withdrawal limit would be exceeded";
-        }
-
-        public static class PinLimitTriesWasReached {
-            public static final int code = 62;
-            public static final String msg = "PIN tries limit was reached";
         }
 
         public static class WithdrawalLimitReached {
@@ -263,11 +321,6 @@ public class Constant {
         public static class InvalidIpinBlock {
             public static final int code = 600;
             public static final String msg = "INVALID_IPIN_BLOCK";
-        }
-
-        public static class InvalidAppId {
-            public static final int code = 601;
-            public static final String msg = "INVALID_APPLICATION_ID";
         }
 
         public static class InvalidUuid {

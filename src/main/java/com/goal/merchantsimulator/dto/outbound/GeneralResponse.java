@@ -5,16 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
+import java.util.Date;
 
 @Data
 @MappedSuperclass
 public class GeneralResponse {
 
-    @JsonProperty(value = "terminalId")
-    private String terminalId;
+    @JsonProperty("clientId")
+    private Long clientId;
 
-    @JsonProperty(value = "tranDateTime")
-    private String tranDateTime;
+    @JsonProperty("terminalId")
+    private Long terminalId;
+
+    @JsonProperty("tranDateTime")
+    private Date tranDateTime;
+
+    @JsonProperty("systemTraceAuditNumber")
+    private Long systemTraceAuditNumber;
 
     @JsonProperty(value = "responseCode")
     private int responseCode;

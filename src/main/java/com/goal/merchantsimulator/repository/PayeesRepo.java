@@ -1,6 +1,6 @@
 package com.goal.merchantsimulator.repository;
 
-import com.goal.consumersimulator.model.Payees;
+import com.goal.merchantsimulator.model.Payees;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -4,7 +4,6 @@ import com.goal.merchantsimulator.config.Constant;
 import com.goal.merchantsimulator.dto.inbound.*;
 import com.goal.merchantsimulator.dto.outbound.*;
 import com.goal.merchantsimulator.mapper.EbsMapper;
-import com.goal.merchantsimulator.model.Card;
 import com.goal.merchantsimulator.repository.TerminalRepo;
 import com.goal.merchantsimulator.repository.CardRepo;
 import com.goal.merchantsimulator.repository.PayeesRepo;
@@ -12,14 +11,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+
+import static com.goal.merchantsimulator.Validation.DefaultValidation.*;
 
 //import static com.goal.consumersimulator.Validation.AccountTransferValidation.*;
 //import static com.goal.consumersimulator.Validation.AdminResetPasswordValidation.isAdminResetPasswordAppIdValid;
@@ -66,9 +63,51 @@ public class EbsServices {
     private final EbsMapper ebsMapper;
 
     public PurchaseResponse purchase(PurchaseRequest purchaseRequest) {
+        PurchaseResponse purchaseResponse = new PurchaseResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseRequest);
+        ebsMapper.purchaseMapper(purchaseRequest, purchaseResponse);
+        if (valid.containsValue(0)) {
+            purchaseResponse.setResponseCode(Constant.ResponseCode.Success.code);
+            purchaseResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
+            purchaseResponse.setResponseStatus(Constant.ResponseCode.Success.status);
+            return purchaseResponse;
+        }
+        purchaseResponse.setResponseCode((Integer) valid.get("code"));
+        purchaseResponse.setResponseMessage((String) valid.get("msg"));
+        purchaseResponse.setResponseStatus((String) valid.get("status"));
+        return purchaseResponse;
+    }
 
+    public PurchaseMobileResponse purchaseMobile(PurchaseMobileRequest purchaseMobileRequest) {
+        PurchaseMobileResponse purchaseMobileResponse = new PurchaseMobileResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseMobileRequest);
+        if (valid.containsValue(0)) {
+            purchaseMobileResponse.setResponseCode(Constant.ResponseCode.Success.code);
+            purchaseMobileResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
+            purchaseMobileResponse.setResponseStatus(Constant.ResponseCode.Success.status);
+            return purchaseMobileResponse;
+        }
+        purchaseMobileResponse.setResponseCode((Integer) valid.get("code"));
+        purchaseMobileResponse.setResponseMessage((String) valid.get("msg"));
+        purchaseMobileResponse.setResponseStatus((String) valid.get("status"));
+        return purchaseMobileResponse;
 
-        return null;
+    }
+
+    public PurchaseWithCashBackResponse purchaseWithCashBack(PurchaseWithCashBackRequest purchaseWithCashBackRequest) {
+        PurchaseWithCashBackResponse purchaseWithCashBackResponse = new PurchaseWithCashBackResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseWithCashBackRequest);
+        if (valid.containsValue(0)) {
+            purchaseWithCashBackResponse.setResponseCode(Constant.ResponseCode.Success.code);
+            purchaseWithCashBackResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
+            purchaseWithCashBackResponse.setResponseStatus(Constant.ResponseCode.Success.status);
+            return purchaseWithCashBackResponse;
+        }
+        purchaseWithCashBackResponse.setResponseCode((Integer) valid.get("code"));
+        purchaseWithCashBackResponse.setResponseMessage((String) valid.get("msg"));
+        purchaseWithCashBackResponse.setResponseStatus((String) valid.get("status"));
+        return purchaseWithCashBackResponse;
+
     }
 
 //    public GetPublicKeyResponse getPublicKeyRequest(GetPublicKeyRequest publicKeyRequest) throws IOException {
@@ -616,188 +655,188 @@ public class EbsServices {
 //        return null;
 //    }
 
-    private Map<String, Object> processBillInquiryInfo(String payeeId) {
-        Map<String, Object> billInfo = new HashMap<>();
-        switch (payeeId) {
-            case "0010010001":
-            case "0010010003":
-            case "0010010005":
-            case "0010020001":
-            case "0010017801":
-            case "0010060005":
-            case "0010060004":
-                break;
-            case "0010010002":
-                billInfo.put("contractNumber", "9790432");
-                billInfo.put("unbilledAmount", "99.0");
-                billInfo.put("totalAmount", "199.0");
-                billInfo.put("lastInvoiceDate", "20/01/2022");
-                billInfo.put("last4Digits", "0432");
-                billInfo.put("billedAmount", "100.00");
-                break;
-            case "0010010004":
-                billInfo.put("contractNumber", "9790432");
-                billInfo.put("unbilledAmount", "99.0");
-                billInfo.put("total", "199.0");
-                billInfo.put("lastInvoiceDate", "20/01/2022");
-                billInfo.put("billedAmount", "100.00");
-                break;
-            case "0010010006":
-                billInfo.put("SubscriberID", "9790432");
-                billInfo.put("billAmount", "100.00");
-                break;
-            case "0010030002":
-                billInfo.put("formNo", "89731");
-                billInfo.put("receiptNo", "9872986");
-                billInfo.put("englishName", "Ahmed Tahir");
-                billInfo.put("arabicName", "احمد طاهر");
-                billInfo.put("dueAmount", "100.00");
-                break;
-            case "0010030003":
-                billInfo.put("BankCode", "9790432");
-                billInfo.put("DeclarantCode ", "99.0");
-                billInfo.put("Amount", "199.0");
-                billInfo.put("ProcStatus", "20/01/2022");
-                billInfo.put("ProcError", "100.00");
-                billInfo.put("RegistrationNumber", "199.0");
-                billInfo.put("RegistrationSerial", "20/01/2022");
-                billInfo.put("Year", "2024");
-                billInfo.put("AmountToBePaid", "20/01/2022");
-                billInfo.put("Status", "2024");
-                break;
-            case "0010030004":
-                billInfo.put("formNo", "9790432");
-                billInfo.put("receiptNo ", "99.0");
-                billInfo.put("englishName", "199.0");
-                billInfo.put("arabicName", "20/01/2022");
-                billInfo.put("studentNo", "100.00");
-                billInfo.put("dueAmount", "199.0");
-                break;
-            case "0010050001":
-                billInfo.put("ReferenceId", "9790432");
-                billInfo.put("UnitName ", "99.0");
-                billInfo.put("ServiceName", "199.0");
-                billInfo.put("PayerName", "20/01/2022");
-                billInfo.put("TotalAmount", "100.00");
-                billInfo.put("DueAmount", "199.0");
-                billInfo.put("InvoiceExpiry", "100.00");
-                billInfo.put("InvoiceStatus", "199.0");
-                break;
-            case "0010060002":
-                billInfo.put("CustomerName", "100.00");
-                billInfo.put("BashaerCardStatus", "199.0");
-                break;
-            case "0010060003":
-                billInfo.put("ServiceDueDate", "100.00");
-                billInfo.put("ServiceDetails", "199.0");
-                billInfo.put("ServiceDueAmount", "100.00");
-                billInfo.put("ServiceTotalAmount", "199.0");
-                break;
-            case "0055555555":
-                billInfo.put("invoice_status", "0");
-                billInfo.put("amount_due", "199.0");
-                billInfo.put("service_provider", "0055555555");
-                billInfo.put("verifier", "987169");
-                billInfo.put("ref_id", "10.0");
-                billInfo.put("minAmount", "10.0");
-                break;
-            case "0055555556":
-                billInfo.put("invoice_status", "0");
-                billInfo.put("amount_due", "199.0");
-                billInfo.put("service_provider", "100.00");
-                billInfo.put("payer_name", "Mohamed Mussa");
-                billInfo.put("minAmount", "10.0");
-                break;
-        }
-        return billInfo;
-    }
-
-    private Map<String, Object> processBillPaymentInfo(String payeeId) {
-        Map<String, Object> billInfo = new HashMap<>();
-        switch (payeeId) {
-            case "0010010001":
-            case "0010017801":
-            case "0010060005":
-            case "0010060004":
-            case "0010010004":
-                break;
-            case "0010010002":
-                billInfo.put("receiptNo", "9790432");
-                break;
-            case "0010010003":
-                billInfo.put("subNewBalance", "100.00");
-                break;
-            case "0010010005":
-            case "0010010006":
-                billInfo.put("SubscriberID", "9790432");
-                billInfo.put("billAmount", "100.00");
-                break;
-            case "0010020001":
-                billInfo.put("meterFees", "9790432");
-                billInfo.put("netAmount", "100.00");
-                billInfo.put("customerName", "9790432");
-                billInfo.put("accountNo", "100.00");
-                billInfo.put("meterNumber", "9790432");
-                billInfo.put("token", "100.00");
-                billInfo.put("unitsInKWh", "9790432");
-                billInfo.put("waterFees", "100.00");
-                billInfo.put("opertorMessage", "9790432");
-                break;
-            case "0010030002":
-                billInfo.put("formNo", "89731");
-                billInfo.put("receiptNo", "9872986");
-                billInfo.put("englishName", "Ahmed Tahir");
-                billInfo.put("arabicName", "احمد طاهر");
-                break;
-            case "0010030003":
-                billInfo.put("BankCode", "9790432");
-                billInfo.put("DeclarantCode ", "99.0");
-                billInfo.put("Amount", "199.0");
-                billInfo.put("ProcStatus", "20/01/2022");
-                billInfo.put("ProcError", "100.00");
-                billInfo.put("ReceiptNumber", "199.0");
-                billInfo.put("ReceiptSerial", "20/01/2022");
-                billInfo.put("ReceiptDate", "2024");
-                billInfo.put("Status", "20/01/2022");
-                billInfo.put("E-15ReceiptNumber", "2024");
-                break;
-            case "0010030004":
-                billInfo.put("formNo", "9790432");
-                billInfo.put("receiptNo ", "99.0");
-                billInfo.put("englishName", "199.0");
-                billInfo.put("arabicName", "20/01/2022");
-                billInfo.put("studentNo", "6356");
-                break;
-            case "0010050001":
-                billInfo.put("ReferenceId", "9790432");
-                billInfo.put("UnitName ", "99.0");
-                billInfo.put("ServiceName", "199.0");
-                billInfo.put("PayerName", "20/01/2022");
-                billInfo.put("TotalAmount", "100.00");
-                break;
-            case "0010060002":
-                billInfo.put("CustomerName", "100.00");
-                break;
-            case "0010060003":
-                billInfo.put("ServiceName", "100.00");
-                billInfo.put("ServiceDetails", "199.0");
-                break;
-            case "0055555555":
-                billInfo.put("invoice_status", "0");
-                billInfo.put("amount_due", "199.0");
-                billInfo.put("service_provider", "0055555555");
-                billInfo.put("verifier", "987169");
-                billInfo.put("ref_id", "10.0");
-                billInfo.put("minAmount", "10.0");
-                break;
-            case "0055555556":
-                billInfo.put("invoice_status", "0");
-                billInfo.put("amount_due", "199.0");
-                billInfo.put("service_provider", "100.00");
-                billInfo.put("minAmount", "10.0");
-                break;
-        }
-        return billInfo;
-    }
-
+//    private Map<String, Object> processBillInquiryInfo(String payeeId) {
+//        Map<String, Object> billInfo = new HashMap<>();
+//        switch (payeeId) {
+//            case "0010010001":
+//            case "0010010003":
+//            case "0010010005":
+//            case "0010020001":
+//            case "0010017801":
+//            case "0010060005":
+//            case "0010060004":
+//                break;
+//            case "0010010002":
+//                billInfo.put("contractNumber", "9790432");
+//                billInfo.put("unbilledAmount", "99.0");
+//                billInfo.put("totalAmount", "199.0");
+//                billInfo.put("lastInvoiceDate", "20/01/2022");
+//                billInfo.put("last4Digits", "0432");
+//                billInfo.put("billedAmount", "100.00");
+//                break;
+//            case "0010010004":
+//                billInfo.put("contractNumber", "9790432");
+//                billInfo.put("unbilledAmount", "99.0");
+//                billInfo.put("total", "199.0");
+//                billInfo.put("lastInvoiceDate", "20/01/2022");
+//                billInfo.put("billedAmount", "100.00");
+//                break;
+//            case "0010010006":
+//                billInfo.put("SubscriberID", "9790432");
+//                billInfo.put("billAmount", "100.00");
+//                break;
+//            case "0010030002":
+//                billInfo.put("formNo", "89731");
+//                billInfo.put("receiptNo", "9872986");
+//                billInfo.put("englishName", "Ahmed Tahir");
+//                billInfo.put("arabicName", "احمد طاهر");
+//                billInfo.put("dueAmount", "100.00");
+//                break;
+//            case "0010030003":
+//                billInfo.put("BankCode", "9790432");
+//                billInfo.put("DeclarantCode ", "99.0");
+//                billInfo.put("Amount", "199.0");
+//                billInfo.put("ProcStatus", "20/01/2022");
+//                billInfo.put("ProcError", "100.00");
+//                billInfo.put("RegistrationNumber", "199.0");
+//                billInfo.put("RegistrationSerial", "20/01/2022");
+//                billInfo.put("Year", "2024");
+//                billInfo.put("AmountToBePaid", "20/01/2022");
+//                billInfo.put("Status", "2024");
+//                break;
+//            case "0010030004":
+//                billInfo.put("formNo", "9790432");
+//                billInfo.put("receiptNo ", "99.0");
+//                billInfo.put("englishName", "199.0");
+//                billInfo.put("arabicName", "20/01/2022");
+//                billInfo.put("studentNo", "100.00");
+//                billInfo.put("dueAmount", "199.0");
+//                break;
+//            case "0010050001":
+//                billInfo.put("ReferenceId", "9790432");
+//                billInfo.put("UnitName ", "99.0");
+//                billInfo.put("ServiceName", "199.0");
+//                billInfo.put("PayerName", "20/01/2022");
+//                billInfo.put("TotalAmount", "100.00");
+//                billInfo.put("DueAmount", "199.0");
+//                billInfo.put("InvoiceExpiry", "100.00");
+//                billInfo.put("InvoiceStatus", "199.0");
+//                break;
+//            case "0010060002":
+//                billInfo.put("CustomerName", "100.00");
+//                billInfo.put("BashaerCardStatus", "199.0");
+//                break;
+//            case "0010060003":
+//                billInfo.put("ServiceDueDate", "100.00");
+//                billInfo.put("ServiceDetails", "199.0");
+//                billInfo.put("ServiceDueAmount", "100.00");
+//                billInfo.put("ServiceTotalAmount", "199.0");
+//                break;
+//            case "0055555555":
+//                billInfo.put("invoice_status", "0");
+//                billInfo.put("amount_due", "199.0");
+//                billInfo.put("service_provider", "0055555555");
+//                billInfo.put("verifier", "987169");
+//                billInfo.put("ref_id", "10.0");
+//                billInfo.put("minAmount", "10.0");
+//                break;
+//            case "0055555556":
+//                billInfo.put("invoice_status", "0");
+//                billInfo.put("amount_due", "199.0");
+//                billInfo.put("service_provider", "100.00");
+//                billInfo.put("payer_name", "Mohamed Mussa");
+//                billInfo.put("minAmount", "10.0");
+//                break;
+//        }
+//        return billInfo;
+//    }
+//
+//    private Map<String, Object> processBillPaymentInfo(String payeeId) {
+//        Map<String, Object> billInfo = new HashMap<>();
+//        switch (payeeId) {
+//            case "0010010001":
+//            case "0010017801":
+//            case "0010060005":
+//            case "0010060004":
+//            case "0010010004":
+//                break;
+//            case "0010010002":
+//                billInfo.put("receiptNo", "9790432");
+//                break;
+//            case "0010010003":
+//                billInfo.put("subNewBalance", "100.00");
+//                break;
+//            case "0010010005":
+//            case "0010010006":
+//                billInfo.put("SubscriberID", "9790432");
+//                billInfo.put("billAmount", "100.00");
+//                break;
+//            case "0010020001":
+//                billInfo.put("meterFees", "9790432");
+//                billInfo.put("netAmount", "100.00");
+//                billInfo.put("customerName", "9790432");
+//                billInfo.put("accountNo", "100.00");
+//                billInfo.put("meterNumber", "9790432");
+//                billInfo.put("token", "100.00");
+//                billInfo.put("unitsInKWh", "9790432");
+//                billInfo.put("waterFees", "100.00");
+//                billInfo.put("opertorMessage", "9790432");
+//                break;
+//            case "0010030002":
+//                billInfo.put("formNo", "89731");
+//                billInfo.put("receiptNo", "9872986");
+//                billInfo.put("englishName", "Ahmed Tahir");
+//                billInfo.put("arabicName", "احمد طاهر");
+//                break;
+//            case "0010030003":
+//                billInfo.put("BankCode", "9790432");
+//                billInfo.put("DeclarantCode ", "99.0");
+//                billInfo.put("Amount", "199.0");
+//                billInfo.put("ProcStatus", "20/01/2022");
+//                billInfo.put("ProcError", "100.00");
+//                billInfo.put("ReceiptNumber", "199.0");
+//                billInfo.put("ReceiptSerial", "20/01/2022");
+//                billInfo.put("ReceiptDate", "2024");
+//                billInfo.put("Status", "20/01/2022");
+//                billInfo.put("E-15ReceiptNumber", "2024");
+//                break;
+//            case "0010030004":
+//                billInfo.put("formNo", "9790432");
+//                billInfo.put("receiptNo ", "99.0");
+//                billInfo.put("englishName", "199.0");
+//                billInfo.put("arabicName", "20/01/2022");
+//                billInfo.put("studentNo", "6356");
+//                break;
+//            case "0010050001":
+//                billInfo.put("ReferenceId", "9790432");
+//                billInfo.put("UnitName ", "99.0");
+//                billInfo.put("ServiceName", "199.0");
+//                billInfo.put("PayerName", "20/01/2022");
+//                billInfo.put("TotalAmount", "100.00");
+//                break;
+//            case "0010060002":
+//                billInfo.put("CustomerName", "100.00");
+//                break;
+//            case "0010060003":
+//                billInfo.put("ServiceName", "100.00");
+//                billInfo.put("ServiceDetails", "199.0");
+//                break;
+//            case "0055555555":
+//                billInfo.put("invoice_status", "0");
+//                billInfo.put("amount_due", "199.0");
+//                billInfo.put("service_provider", "0055555555");
+//                billInfo.put("verifier", "987169");
+//                billInfo.put("ref_id", "10.0");
+//                billInfo.put("minAmount", "10.0");
+//                break;
+//            case "0055555556":
+//                billInfo.put("invoice_status", "0");
+//                billInfo.put("amount_due", "199.0");
+//                billInfo.put("service_provider", "100.00");
+//                billInfo.put("minAmount", "10.0");
+//                break;
+//        }
+//        return billInfo;
+//    }
+//
 }

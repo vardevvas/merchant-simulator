@@ -16,7 +16,7 @@ public class Terminal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long terminalId;
 
     @Column(name = "client_id", unique = true, nullable = false)
     private Long clientId;

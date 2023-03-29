@@ -10,13 +10,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class PurchaseRequest extends DefaultRequest{
+public class PurchaseWithCashBackRequest extends DefaultRequest {
 
     @JsonProperty("pan")
     @Pattern(regexp = "^(?=[0-9]*$)(?:.{16}|.{19})$", message = "PAN must be either 16 or 19 numbers")
@@ -42,9 +41,9 @@ public class PurchaseRequest extends DefaultRequest{
     @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
 
-    @JsonProperty("additionalAmount")
-    @NotNull(message = "additional amount should not be empty or null")
-    private Double additionalAmount;
+    @JsonProperty("cashBackAmount")
+    @NotBlank(message = "Cash Back Amount date is mandatory")
+    private Boolean cashBackAmount;
 
     @JsonProperty("track2")
     @Size(min = 33, max = 37)
