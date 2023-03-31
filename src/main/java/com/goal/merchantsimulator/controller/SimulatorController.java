@@ -23,20 +23,32 @@ public class SimulatorController {
     final private EbsServices ebsServices;
 
     @PostMapping("/purchase")
-    public ResponseEntity<PurchaseResponse> purchase(@Validated @RequestBody PurchaseRequest purchaseRequest) {
-        return new ResponseEntity<>(ebsServices.purchase(purchaseRequest), HttpStatus.OK);
+    public ResponseEntity<PurchaseResponse> purchase(@Validated @RequestBody PurchaseRequest request) {
+        return new ResponseEntity<>(ebsServices.purchase(request), HttpStatus.OK);
 
     }
 
     @PostMapping("/purchaseMobile")
-    public ResponseEntity<PurchaseMobileResponse> purchaseMobile(@Validated @RequestBody PurchaseMobileRequest purchaseMobileRequest) {
-        return new ResponseEntity<>(ebsServices.purchaseMobile(purchaseMobileRequest), HttpStatus.OK);
+    public ResponseEntity<PurchaseMobileResponse> purchaseMobile(@Validated @RequestBody PurchaseMobileRequest request) {
+        return new ResponseEntity<>(ebsServices.purchaseMobile(request), HttpStatus.OK);
 
     }
 
     @PostMapping("/purchaseWithCashBack")
-    public ResponseEntity<PurchaseWithCashBackResponse> purchaseWithCashBack(@Validated @RequestBody PurchaseWithCashBackRequest purchaseWithCashBackRequest) {
-        return new ResponseEntity<>(ebsServices.purchaseWithCashBack(purchaseWithCashBackRequest), HttpStatus.OK);
+    public ResponseEntity<PurchaseWithCashBackResponse> purchaseWithCashBack(@Validated @RequestBody PurchaseWithCashBackRequest request) {
+        return new ResponseEntity<>(ebsServices.purchaseWithCashBack(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/reverse")
+    public ResponseEntity<ReversalResponse> reverse(@Validated @RequestBody ReversalRequest request) {
+        return new ResponseEntity<>(ebsServices.reverse(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/getMiniStatement")
+    public ResponseEntity<MiniStatementResponse> GetMiniStatement(@Validated @RequestBody MiniStatementRequest request) {
+        return new ResponseEntity<>(ebsServices.GetMiniStatement(request), HttpStatus.OK);
 
     }
 

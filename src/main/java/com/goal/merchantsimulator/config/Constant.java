@@ -8,44 +8,20 @@ import java.util.Map;
 
 public class Constant {
 
-//    public GeneralResponse setResponse(GeneralResponse generalResponse, String response) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+//    public GeneralResponse setResponse(GeneralResponse generalResponse, ResponseCode. response) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
 //        Class res = Class.forName(response);
 //        Object fasdfa = res.newInstance();
-////        ResponseCode asdfasdf =  (ResponseCode) res.getDeclaredConstructor().newInstance();
-////        res.getDeclaredConstructor().newInstance();
-//        generalResponse.setResponseCode(ResponseCode.fasdfa.code);
+//        ResponseCode asdfasdf =  (ResponseCode) res.getDeclaredConstructor().newInstance();
+//        res.getDeclaredConstructor().newInstance();
+//        generalResponse.setResponseCode(response.code);
 //        generalResponse.setResponseMessage(ResponseCode.asdfasdf.msg);
 //        generalResponse.setResponseStatus(ResponseCode.response.status);
 //        return generalResponse;
 //    }
-        
+//
     public static class ResponseCode {
-//        public class DefaultClass {
-//            private int code;
-//            private String msg;
-//            private String status;
-//
-//            public DefaultClass(int code, String msg, String status) {
-//                this.code = code;
-//                this.msg = msg;
-//                this.status = status;
-//            }
-//
-//            public int getCode() {
-//                return code;
-//            }
-//
-//            public String getMsg() {
-//                return msg;
-//            }
-//
-//            public String getStatus() {
-//                return status;
-//            }
-//        }
 
-
-        public static class Success {
+        public class Success {
             public static final int code = 0;
             public static final String msg = "Approved";
             public static final String status = "Successful";

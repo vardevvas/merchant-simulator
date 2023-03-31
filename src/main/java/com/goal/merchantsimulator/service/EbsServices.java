@@ -62,51 +62,83 @@ public class EbsServices {
     private final CardRepo cardRepo;
     private final EbsMapper ebsMapper;
 
-    public PurchaseResponse purchase(PurchaseRequest purchaseRequest) {
-        PurchaseResponse purchaseResponse = new PurchaseResponse();
-        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseRequest);
-        ebsMapper.purchaseMapper(purchaseRequest, purchaseResponse);
+    public PurchaseResponse purchase(PurchaseRequest request) {
+        PurchaseResponse response = new PurchaseResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.purchaseMapper(request, response);
         if (valid.containsValue(0)) {
-            purchaseResponse.setResponseCode(Constant.ResponseCode.Success.code);
-            purchaseResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
-            purchaseResponse.setResponseStatus(Constant.ResponseCode.Success.status);
-            return purchaseResponse;
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
         }
-        purchaseResponse.setResponseCode((Integer) valid.get("code"));
-        purchaseResponse.setResponseMessage((String) valid.get("msg"));
-        purchaseResponse.setResponseStatus((String) valid.get("status"));
-        return purchaseResponse;
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
     }
 
     public PurchaseMobileResponse purchaseMobile(PurchaseMobileRequest purchaseMobileRequest) {
-        PurchaseMobileResponse purchaseMobileResponse = new PurchaseMobileResponse();
+        PurchaseMobileResponse response = new PurchaseMobileResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseMobileRequest);
         if (valid.containsValue(0)) {
-            purchaseMobileResponse.setResponseCode(Constant.ResponseCode.Success.code);
-            purchaseMobileResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
-            purchaseMobileResponse.setResponseStatus(Constant.ResponseCode.Success.status);
-            return purchaseMobileResponse;
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
         }
-        purchaseMobileResponse.setResponseCode((Integer) valid.get("code"));
-        purchaseMobileResponse.setResponseMessage((String) valid.get("msg"));
-        purchaseMobileResponse.setResponseStatus((String) valid.get("status"));
-        return purchaseMobileResponse;
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
 
     }
 
-    public PurchaseWithCashBackResponse purchaseWithCashBack(PurchaseWithCashBackRequest purchaseWithCashBackRequest) {
-        PurchaseWithCashBackResponse purchaseWithCashBackResponse = new PurchaseWithCashBackResponse();
-        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(purchaseWithCashBackRequest);
+    public PurchaseWithCashBackResponse purchaseWithCashBack(PurchaseWithCashBackRequest request) {
+        PurchaseWithCashBackResponse response = new PurchaseWithCashBackResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         if (valid.containsValue(0)) {
-            purchaseWithCashBackResponse.setResponseCode(Constant.ResponseCode.Success.code);
-            purchaseWithCashBackResponse.setResponseMessage(Constant.ResponseCode.Success.msg);
-            purchaseWithCashBackResponse.setResponseStatus(Constant.ResponseCode.Success.status);
-            return purchaseWithCashBackResponse;
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
         }
-        purchaseWithCashBackResponse.setResponseCode((Integer) valid.get("code"));
-        purchaseWithCashBackResponse.setResponseMessage((String) valid.get("msg"));
-        purchaseWithCashBackResponse.setResponseStatus((String) valid.get("status"));
-        return purchaseWithCashBackResponse;
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+
+    }
+
+    public ReversalResponse reverse(ReversalRequest request) {
+        ReversalResponse response = new ReversalResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+
+    }
+
+    public MiniStatementResponse GetMiniStatement(MiniStatementRequest request) {
+        MiniStatementResponse response = new MiniStatementResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
 
     }
 
