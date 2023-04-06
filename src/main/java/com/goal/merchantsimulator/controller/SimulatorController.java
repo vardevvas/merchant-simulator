@@ -58,11 +58,16 @@ public class SimulatorController {
 
     }
 
+    @PostMapping("/payBill")
+    public ResponseEntity<BillPaymentResponse> billPrepayment(@Validated @RequestBody BillPaymentRequest request) {
+        return new ResponseEntity<>(ebsServices.billPayment(request), HttpStatus.OK);
+
+    }
+
     @PostMapping("/prepayBill")
     public ResponseEntity<BillPrepaymentResponse> billPrepayment(@Validated @RequestBody BillPrepaymentRequest request) {
         return new ResponseEntity<>(ebsServices.billPrepayment(request), HttpStatus.OK);
 
     }
-
 
 }

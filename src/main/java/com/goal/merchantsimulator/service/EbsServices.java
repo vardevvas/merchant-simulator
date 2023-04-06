@@ -141,4 +141,20 @@ public class EbsServices {
         response.setResponseStatus((String) valid.get("status"));
         return response;
     }
+
+    public BillPaymentResponse billPayment(BillPaymentRequest request) {
+        BillPaymentResponse response = new BillPaymentResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.billPaymentMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
 }
