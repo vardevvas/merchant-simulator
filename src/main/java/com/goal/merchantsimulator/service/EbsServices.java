@@ -16,6 +16,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.goal.merchantsimulator.Validation.BillInquiryValidation.isPayeeIdValid;
 import static com.goal.merchantsimulator.Validation.DefaultValidation.*;
 
 @Service
@@ -30,12 +31,6 @@ public class EbsServices {
         PurchaseResponse response = new PurchaseResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.purchaseMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -46,12 +41,6 @@ public class EbsServices {
         PurchaseMobileResponse response = new PurchaseMobileResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.purchaseMobileMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -63,12 +52,6 @@ public class EbsServices {
         PurchaseWithCashBackResponse response = new PurchaseWithCashBackResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.purchaseWithCashBackMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -80,12 +63,6 @@ public class EbsServices {
         ReversalResponse response = new ReversalResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.reverseBackMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -97,12 +74,6 @@ public class EbsServices {
         MiniStatementResponse response = new MiniStatementResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.GetMiniStatementMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -112,14 +83,9 @@ public class EbsServices {
 
     public BillInquiryResponse getBillInquiry(BillInquiryRequest request) {
         BillInquiryResponse response = new BillInquiryResponse();
-        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.getBillInquiryMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        valid = valid.containsValue(0)? isPayeeIdValid().apply(request) : valid;
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -130,12 +96,6 @@ public class EbsServices {
         BillPrepaymentResponse response = new BillPrepaymentResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.billPrepaymentMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -146,12 +106,6 @@ public class EbsServices {
         BillPaymentResponse response = new BillPaymentResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.billPaymentMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -162,12 +116,6 @@ public class EbsServices {
         BalanceInquiryResponse response = new BalanceInquiryResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.balanceInquiryMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -178,12 +126,6 @@ public class EbsServices {
         PINChangeResponse response = new PINChangeResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.changePINMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -194,12 +136,6 @@ public class EbsServices {
         CashInResponse response = new CashInResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.cashInMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -210,12 +146,6 @@ public class EbsServices {
         RefundResponse response = new RefundResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.refundMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -226,12 +156,6 @@ public class EbsServices {
         GenerateVoucherResponse response = new GenerateVoucherResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.generateVoucherMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -242,12 +166,6 @@ public class EbsServices {
         CashOutVoucherResponse response = new CashOutVoucherResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.cashOutVoucherMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -258,12 +176,6 @@ public class EbsServices {
         CardTransferResponse response = new CardTransferResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.cardTransferMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -274,12 +186,6 @@ public class EbsServices {
         AccountTransferResponse response = new AccountTransferResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.accountTransferMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -290,12 +196,6 @@ public class EbsServices {
         VoucherCashInResponse response = new VoucherCashInResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.voucherCashInMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -306,12 +206,6 @@ public class EbsServices {
         GeneralResponse response = new GeneralResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.networkTestMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -322,12 +216,6 @@ public class EbsServices {
         PayeesListResponse response = new PayeesListResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.payeesListMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -338,12 +226,6 @@ public class EbsServices {
         WorkingKeyResponse response = new WorkingKeyResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.workingKeyMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -354,12 +236,6 @@ public class EbsServices {
         CashOutResponse response = new CashOutResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.cashOutMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -370,12 +246,6 @@ public class EbsServices {
         TransactionStatusResponse response = new TransactionStatusResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.transactionStatusMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -386,12 +256,6 @@ public class EbsServices {
         VoidPurchaseResponse response = new VoidPurchaseResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.voidPurchaseMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));
@@ -402,12 +266,6 @@ public class EbsServices {
         CompleteTransactionResponse response = new CompleteTransactionResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
         ebsMapper.completeTransactionMapper(request, response);
-        if (valid.containsValue(0)) {
-            response.setResponseCode(Constant.ResponseCode.Success.code);
-            response.setResponseMessage(Constant.ResponseCode.Success.msg);
-            response.setResponseStatus(Constant.ResponseCode.Success.status);
-            return response;
-        }
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
         response.setResponseStatus((String) valid.get("status"));

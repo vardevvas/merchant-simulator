@@ -7,6 +7,7 @@ import com.goal.merchantsimulator.model.Terminal;
 import com.goal.merchantsimulator.repository.TerminalRepo;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.MappedSuperclass;
 import java.util.*;
 import java.util.function.Function;
 
@@ -53,14 +54,14 @@ public interface DefaultValidation extends Function<DefaultRequest, Map<Object,O
         return defaultRequest -> {
             Optional<Terminal> terminalOptional = terminalRepo.findBySystemTraceAuditNumber(defaultRequest.getSystemTraceAuditNumber());
             if(terminalOptional.isEmpty()){
-                res.put("code", Constant.ResponseCode.InvalidSystemTraceAuditNumber.code);
-                res.put("msg",Constant.ResponseCode.InvalidSystemTraceAuditNumber.msg);
-                res.put("status","Failed");
+                res.put("code",Constant.ResponseCode.Success.code);
+                res.put("msg",Constant.ResponseCode.Success.msg);
+                res.put("status","Successful");
                 return res;
             }
-            res.put("code",Constant.ResponseCode.Success.code);
-            res.put("msg",Constant.ResponseCode.Success.msg);
-            res.put("status","Successful");
+            res.put("code", Constant.ResponseCode.InvalidSystemTraceAuditNumber.code);
+            res.put("msg",Constant.ResponseCode.InvalidSystemTraceAuditNumber.msg);
+            res.put("status","Failed");
             return res;
         };
     }
@@ -71,5 +72,4 @@ public interface DefaultValidation extends Function<DefaultRequest, Map<Object,O
             return result.containsValue(0) ? other.apply(defaultRequest) : result;
         };
     }
-
 }

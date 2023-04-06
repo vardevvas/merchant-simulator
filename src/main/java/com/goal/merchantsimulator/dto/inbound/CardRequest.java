@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @Data
 public class CardRequest {
 
-    @JsonProperty("PAN")
+    @JsonProperty("pan")
     @Pattern(regexp = "^(?=[0-9]*$)(?:.{16}|.{19})$", message = "PAN must be either 16 or 19")
     @NotBlank(message = "pan is mandatory")
     private String pan;

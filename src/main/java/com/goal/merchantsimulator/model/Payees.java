@@ -14,10 +14,11 @@ import javax.persistence.Id;
 @Entity
 public class Payees{
 
+    @Id
+    @Column(name = "payee_id")
+    private String payeeId;
+
     @Column(name = "payee_name")
     private String payeeName;
 
-    @Column(name = "payee_id")
-    @Id
-    private String payeeId;
 }

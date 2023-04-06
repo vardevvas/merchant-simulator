@@ -39,6 +39,7 @@ public class AccountTransferRequest extends DefaultRequest{
 
     @JsonProperty("tranAmount")
     @NotNull(message = "transaction amount should not be empty or null")
+    @Size(max = 10,min = 2, message = "tranAmount size should be between 10 - 2")
     private Double tranAmount;
 
     @JsonProperty(value = "toAccount")
