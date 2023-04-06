@@ -12,11 +12,11 @@ import org.springframework.context.annotation.Bean;
 public interface EbsMapper {
 //    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void purchaseMapper(PurchaseRequest purchaseRequest, @MappingTarget PurchaseResponse purchaseResponse);
-//
-//    void publicKeyMapper(GetPublicKeyRequest getPublicKeyRequest, @MappingTarget GetPublicKeyResponse getPublicKeyResponse);
-//
-//    void registrationMapper(RegisterRequest registerRequest, @MappingTarget RegisterResponse registerResponse);
-//
+    void purchaseMobileMapper(PurchaseMobileRequest purchaseMobileRequest, @MappingTarget PurchaseMobileResponse purchaseMobileResponse);
+    void purchaseWithCashBackMapper(PurchaseWithCashBackRequest purchaseWithCashBackRequest, @MappingTarget PurchaseWithCashBackResponse purchaseWithCashBackResponse);
+    void reverseBackMapper(ReversalRequest reversalRequest, @MappingTarget ReversalResponse reversalResponse);
+    void GetMiniStatementMapper(MiniStatementRequest miniStatementRequest, @MappingTarget MiniStatementResponse miniStatementResponse);
+
 //    void completeCardRegisterMapper(CompleteCardRegistrationRequest cardRegistrationRequest, @MappingTarget CompleteCardRegistrationResponse completeCardRegistrationResponse);
 //
 //    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
