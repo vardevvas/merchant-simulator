@@ -20,12 +20,9 @@ public class RefundResponse extends GeneralResponse {
     private String pan;
 
     @JsonProperty("tranCurrencyCode")
-    @NotBlank(message = "transaction Currency Code date is mandatory")
-    @Size(max = 3)
     private String tranCurrencyCode;
 
     @JsonProperty("tranAmount")
-    @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
 
     @JsonProperty("referenceNumber")
@@ -41,7 +38,6 @@ public class RefundResponse extends GeneralResponse {
     private String approvalCode;
 
     @JsonProperty("checkDuplicate")
-    @NotBlank(message = "check duplicate date is mandatory")
     private Boolean checkDuplicate;
 
 }

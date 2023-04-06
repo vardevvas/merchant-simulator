@@ -15,28 +15,22 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Data
 @ToString
-public class GenerateVoucherResponse extends GeneralResponse {
+public class CashOutResponse extends GeneralResponse {
 
     @JsonProperty("pan")
     private String pan;
 
     @JsonProperty("tranCurrencyCode")
-    @NotBlank(message = "transaction Currency Code date is mandatory")
-    @Size(max = 3)
     private String tranCurrencyCode;
 
     @JsonProperty("tranAmount")
-    @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
 
     @JsonProperty("referenceNumber")
     private String referenceNumber;
 
-    @JsonProperty("phoneNumber")
-    private String phoneNumber;
-
-    @JsonProperty("voucherNumber")
-    private Integer voucherNumber;
+    @JsonProperty("additionalAmount")
+    private Double additionalAmount;
 
     @JsonProperty("tranFee")
     private Double tranFee;

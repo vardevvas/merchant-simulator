@@ -1,4 +1,4 @@
-package com.goal.merchantsimulator.dto.outbound;
+package com.goal.merchantsimulator.dto.inbound;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,10 +15,22 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Data
 @ToString
-public class GenerateVoucherResponse extends GeneralResponse {
+public class CashOutRequest extends DefaultRequest{
 
     @JsonProperty("pan")
+    @Pattern(regexp = "^(?=[0-9]*$)(?:.{16}|.{19})$", message = "PAN must be either 16 or 19 numbers")
+    @NotBlank(message = "pan is mandatory")
     private String pan;
+
+    @JsonProperty("pin")
+    @NotNull(message = "PIN should not be empty or null")
+    @Size(min = 16, max = 16)
+    private String pin;
+
+    @JsonProperty("expiry_date")
+    @NotBlank(message = "expiry date is mandatory")
+    @Size(min = 4, max = 4)
+    private String expDate;
 
     @JsonProperty("tranCurrencyCode")
     @NotBlank(message = "transaction Currency Code date is mandatory")
@@ -29,25 +41,18 @@ public class GenerateVoucherResponse extends GeneralResponse {
     @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
 
-    @JsonProperty("referenceNumber")
-    private String referenceNumber;
-
-    @JsonProperty("phoneNumber")
-    private String phoneNumber;
-
-    @JsonProperty("voucherNumber")
-    private Integer voucherNumber;
-
-    @JsonProperty("tranFee")
-    private Double tranFee;
-
-    @JsonProperty("approvalCode")
-    private String approvalCode;
+    @JsonProperty("track2")
+    @Size(min = 33, max = 37)
+    private String track2;
 
     @JsonProperty("checkDuplicate")
+    @NotBlank(message = "check duplicate date is mandatory")
     private Boolean checkDuplicate;
 
     @JsonProperty("tranAuthenticationType")
+    @NotBlank(message = "transaction auth type date is mandatory")
+    @Size(min = 2, max = 2, message = "fromAccountType size should be 2")
+    @Pattern(regexp = "\\d+")
     private String tranAuthenticationType;
 
 }

@@ -100,4 +100,70 @@ public class SimulatorController {
 
     }
 
+    @PostMapping("/cashOutVoucher")
+    public ResponseEntity<CashOutVoucherResponse> cashOutVoucher(@Validated @RequestBody CashOutVoucherRequest request) {
+        return new ResponseEntity<>(ebsServices.cashOutVoucher(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/doCardTransfer")
+    public ResponseEntity<CardTransferResponse> cardTransfer(@Validated @RequestBody CardTransferRequest request) {
+        return new ResponseEntity<>(ebsServices.cardTransfer(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/doAccountTransfer")
+    public ResponseEntity<AccountTransferResponse> accountTransfer(@Validated @RequestBody AccountTransferRequest request) {
+        return new ResponseEntity<>(ebsServices.accountTransfer(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/voucherCashIn")
+    public ResponseEntity<VoucherCashInResponse> voucherCashIn(@Validated @RequestBody VoucherCashInRequest request) {
+        return new ResponseEntity<>(ebsServices.voucherCashIn(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/isAlive")
+    public ResponseEntity<GeneralResponse> networkTest(@Validated @RequestBody DefaultRequest request) {
+        return new ResponseEntity<>(ebsServices.networkTest(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/getPayeesList")
+    public ResponseEntity<PayeesListResponse> payeesList(@Validated @RequestBody DefaultRequest request) {
+        return new ResponseEntity<>(ebsServices.payeesList(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/getWorkingKey")
+    public ResponseEntity<WorkingKeyResponse> workingKey(@Validated @RequestBody DefaultRequest request) {
+        return new ResponseEntity<>(ebsServices.workingKey(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/cashOut")
+    public ResponseEntity<CashOutResponse> cashOut(@Validated @RequestBody CashOutRequest request) {
+        return new ResponseEntity<>(ebsServices.cashOut(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/getTransactionStatus")
+    public ResponseEntity<TransactionStatusResponse> transactionStatus(@Validated @RequestBody TransactionStatusRequest request) {
+        return new ResponseEntity<>(ebsServices.transactionStatus(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/void")
+    public ResponseEntity<VoidPurchaseResponse> transactionStatus(@Validated @RequestBody VoidPurchaseRequest request) {
+        return new ResponseEntity<>(ebsServices.voidPurchase(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/completeTransaction")
+    public ResponseEntity<CompleteTransactionResponse> completeTransaction(@Validated @RequestBody DefaultRequest request) {
+        return new ResponseEntity<>(ebsServices.completeTransaction(request), HttpStatus.OK);
+
+    }
+
 }

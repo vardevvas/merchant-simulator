@@ -12,16 +12,16 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Data
 @ToString
-public class ReversalResponse extends GeneralResponse {
+public class VoidPurchaseResponse extends GeneralResponse {
 
     @JsonProperty("pan")
     private String pan;
 
-    @JsonProperty("serviceId")
-    private String serviceId;
-
     @JsonProperty("originalTranSystemTraceAuditNumber")
     private String originalTranSystemTraceAuditNumber;
+
+    @JsonProperty("originalTranReferenceNumber")
+    private Long originalTranReferenceNumber;
 
     @JsonProperty("checkDuplicate")
     private Boolean checkDuplicate;

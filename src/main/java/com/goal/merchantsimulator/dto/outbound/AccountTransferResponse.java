@@ -6,43 +6,40 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class GenerateVoucherResponse extends GeneralResponse {
+public class AccountTransferResponse extends GeneralResponse {
 
     @JsonProperty("pan")
     private String pan;
 
     @JsonProperty("tranCurrencyCode")
-    @NotBlank(message = "transaction Currency Code date is mandatory")
-    @Size(max = 3)
     private String tranCurrencyCode;
 
     @JsonProperty("tranAmount")
-    @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
-
-    @JsonProperty("referenceNumber")
-    private String referenceNumber;
-
-    @JsonProperty("phoneNumber")
-    private String phoneNumber;
-
-    @JsonProperty("voucherNumber")
-    private Integer voucherNumber;
 
     @JsonProperty("tranFee")
     private Double tranFee;
 
+    @JsonProperty("referenceNumber")
+    private String referenceNumber;
+
+    @JsonProperty("additionalAmount")
+    private Double additionalAmount;
+
     @JsonProperty("approvalCode")
     private String approvalCode;
+
+    @JsonProperty("fromAccount")
+    private String fromAccount;
+
+    @JsonProperty("toAccount")
+    private String toAccount;
 
     @JsonProperty("checkDuplicate")
     private Boolean checkDuplicate;

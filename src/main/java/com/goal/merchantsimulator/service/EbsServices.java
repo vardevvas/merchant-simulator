@@ -237,4 +237,180 @@ public class EbsServices {
         response.setResponseStatus((String) valid.get("status"));
         return response;
     }
+
+    public CashOutVoucherResponse cashOutVoucher(CashOutVoucherRequest request) {
+        CashOutVoucherResponse response = new CashOutVoucherResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.cashOutVoucherMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public CardTransferResponse cardTransfer(CardTransferRequest request) {
+        CardTransferResponse response = new CardTransferResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.cardTransferMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public AccountTransferResponse accountTransfer(AccountTransferRequest request) {
+        AccountTransferResponse response = new AccountTransferResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.accountTransferMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public VoucherCashInResponse voucherCashIn(VoucherCashInRequest request) {
+        VoucherCashInResponse response = new VoucherCashInResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.voucherCashInMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public GeneralResponse networkTest(DefaultRequest request) {
+        GeneralResponse response = new GeneralResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.networkTestMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public PayeesListResponse payeesList(DefaultRequest request) {
+        PayeesListResponse response = new PayeesListResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.payeesListMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public WorkingKeyResponse workingKey(DefaultRequest request) {
+        WorkingKeyResponse response = new WorkingKeyResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.workingKeyMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public CashOutResponse cashOut(CashOutRequest request) {
+        CashOutResponse response = new CashOutResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.cashOutMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public TransactionStatusResponse transactionStatus(TransactionStatusRequest request) {
+        TransactionStatusResponse response = new TransactionStatusResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.transactionStatusMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public VoidPurchaseResponse voidPurchase(VoidPurchaseRequest request) {
+        VoidPurchaseResponse response = new VoidPurchaseResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.voidPurchaseMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
+
+    public CompleteTransactionResponse completeTransaction(DefaultRequest request) {
+        CompleteTransactionResponse response = new CompleteTransactionResponse();
+        Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        ebsMapper.completeTransactionMapper(request, response);
+        if (valid.containsValue(0)) {
+            response.setResponseCode(Constant.ResponseCode.Success.code);
+            response.setResponseMessage(Constant.ResponseCode.Success.msg);
+            response.setResponseStatus(Constant.ResponseCode.Success.status);
+            return response;
+        }
+        response.setResponseCode((Integer) valid.get("code"));
+        response.setResponseMessage((String) valid.get("msg"));
+        response.setResponseStatus((String) valid.get("status"));
+        return response;
+    }
 }

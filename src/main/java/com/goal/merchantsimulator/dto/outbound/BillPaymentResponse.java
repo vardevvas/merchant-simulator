@@ -33,7 +33,6 @@ public class BillPaymentResponse extends GeneralResponse {
     private String approvalCode;
 
     @JsonProperty("payeeId")
-    @NotBlank(message = "payeeId is mandatory")
     private String payeeId;
 
     @JsonProperty("billerResponseCode")

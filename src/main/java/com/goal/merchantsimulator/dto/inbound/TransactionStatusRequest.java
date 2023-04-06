@@ -1,4 +1,4 @@
-package com.goal.merchantsimulator.dto.outbound;
+package com.goal.merchantsimulator.dto.inbound;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -7,23 +7,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class ReversalResponse extends GeneralResponse {
-
-    @JsonProperty("pan")
-    private String pan;
-
-    @JsonProperty("serviceId")
-    private String serviceId;
+public class TransactionStatusRequest extends DefaultRequest{
 
     @JsonProperty("originalTranSystemTraceAuditNumber")
+    @NotBlank(message = "Original transaction system trace audit number is mandatory")
     private String originalTranSystemTraceAuditNumber;
-
-    @JsonProperty("checkDuplicate")
-    private Boolean checkDuplicate;
 
 }

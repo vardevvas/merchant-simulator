@@ -20,12 +20,9 @@ public class CashInResponse extends GeneralResponse {
     private String pan;
 
     @JsonProperty("tranCurrencyCode")
-    @NotBlank(message = "transaction Currency Code date is mandatory")
-    @Size(max = 3)
     private String tranCurrencyCode;
 
     @JsonProperty("tranAmount")
-    @NotNull(message = "transaction amount should not be empty or null")
     private Double tranAmount;
 
     @JsonProperty("referenceNumber")
