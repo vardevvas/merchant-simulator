@@ -16,6 +16,8 @@ public interface EbsMapper {
     void purchaseWithCashBackMapper(PurchaseWithCashBackRequest purchaseWithCashBackRequest, @MappingTarget PurchaseWithCashBackResponse purchaseWithCashBackResponse);
     void reverseBackMapper(ReversalRequest reversalRequest, @MappingTarget ReversalResponse reversalResponse);
     void GetMiniStatementMapper(MiniStatementRequest miniStatementRequest, @MappingTarget MiniStatementResponse miniStatementResponse);
+    void getBillInquiryMapper(BillInquiryRequest billInquiryRequest, @MappingTarget BillInquiryResponse billInquiryResponse);
+    void billPrepaymentMapper(BillPrepaymentRequest billPrepaymentRequest, @MappingTarget BillPrepaymentResponse billPrepaymentResponse);
 
 //    void completeCardRegisterMapper(CompleteCardRegistrationRequest cardRegistrationRequest, @MappingTarget CompleteCardRegistrationResponse completeCardRegistrationResponse);
 //
