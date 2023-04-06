@@ -70,4 +70,34 @@ public class SimulatorController {
 
     }
 
+    @PostMapping("/getBalance")
+    public ResponseEntity<BalanceInquiryResponse> balanceInquiry(@Validated @RequestBody BalanceInquiryRequest request) {
+        return new ResponseEntity<>(ebsServices.balanceInquiry(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/changePin")
+    public ResponseEntity<PINChangeResponse> changePIN(@Validated @RequestBody PINChangeRequest request) {
+        return new ResponseEntity<>(ebsServices.changePIN(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/cashIn")
+    public ResponseEntity<CashInResponse> cashIn(@Validated @RequestBody CashInRequest request) {
+        return new ResponseEntity<>(ebsServices.cashIn(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/refund")
+    public ResponseEntity<RefundResponse> refund(@Validated @RequestBody RefundRequest request) {
+        return new ResponseEntity<>(ebsServices.refund(request), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/generateVoucher")
+    public ResponseEntity<GenerateVoucherResponse> generateVoucher(@Validated @RequestBody GenerateVoucherRequest request) {
+        return new ResponseEntity<>(ebsServices.generateVoucher(request), HttpStatus.OK);
+
+    }
+
 }
