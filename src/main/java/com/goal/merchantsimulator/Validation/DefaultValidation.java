@@ -42,9 +42,6 @@ public interface DefaultValidation extends Function<DefaultRequest, Map<Object,O
                 res.put("status","Failed");
                 return res;
             }
-            res.put("code",Constant.ResponseCode.Success.code);
-            res.put("msg",Constant.ResponseCode.Success.msg);
-            res.put("status","Successful");
             return res;
         };
     }
@@ -54,9 +51,6 @@ public interface DefaultValidation extends Function<DefaultRequest, Map<Object,O
         return defaultRequest -> {
             Optional<Terminal> terminalOptional = terminalRepo.findBySystemTraceAuditNumber(defaultRequest.getSystemTraceAuditNumber());
             if(terminalOptional.isEmpty()){
-                res.put("code",Constant.ResponseCode.Success.code);
-                res.put("msg",Constant.ResponseCode.Success.msg);
-                res.put("status","Successful");
                 return res;
             }
             res.put("code", Constant.ResponseCode.InvalidSystemTraceAuditNumber.code);

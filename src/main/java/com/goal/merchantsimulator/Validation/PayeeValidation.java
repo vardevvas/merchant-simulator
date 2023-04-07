@@ -2,21 +2,17 @@ package com.goal.merchantsimulator.Validation;
 
 import com.goal.merchantsimulator.config.Constant;
 import com.goal.merchantsimulator.dto.inbound.BillInquiryRequest;
-import com.goal.merchantsimulator.dto.inbound.DefaultRequest;
-import com.goal.merchantsimulator.model.Terminal;
-import com.goal.merchantsimulator.repository.TerminalRepo;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 
 @FunctionalInterface
 @Component
-public interface BillInquiryValidation extends Function<BillInquiryRequest, Map<Object, Object>>{
+public interface PayeeValidation extends Function<BillInquiryRequest, Map<Object, Object>>{
 
-    static BillInquiryValidation isPayeeIdValid() {
+    static PayeeValidation isPayeeIdValid() {
         return billInquiryRequest -> {
             Map<Object,Object> res = new HashMap<>();
             res.put("code",Constant.ResponseCode.Success.code);
@@ -108,7 +104,7 @@ public interface BillInquiryValidation extends Function<BillInquiryRequest, Map<
         };
     }
 
-    default BillInquiryValidation and(BillInquiryValidation other) {
+    default PayeeValidation and(PayeeValidation other) {
         return defaultRequest -> {
             Map<Object,Object > result = this.apply(defaultRequest);
             return result.containsValue(0) ? other.apply(defaultRequest) : result;

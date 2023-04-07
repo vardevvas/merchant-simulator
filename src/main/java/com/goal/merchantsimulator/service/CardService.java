@@ -9,12 +9,24 @@ import com.goal.merchantsimulator.repository.CardRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CardService {
     private final CardRepo cardRepo;
+
+    public Map isPanValid(String pan, String expDate, Map res) {
+            Optional<Card> card = cardRepo.findByPan(pan);
+            if(pan == null || card.isEmpty() || !card.get().getExpDate().equals(expDate)){
+                res.put("code", Constant.ResponseCode.InvalidCard.code);
+                res.put("msg", Constant.ResponseCode.InvalidCard.msg);
+                res.put("status", "Failed");
+            }
+            return res;
+    }
 
     public AdminGeneralResponse save(CardRequest cardRequest){
         Optional<Card> cardOptional = cardRepo.findByPan(cardRequest.getPan());

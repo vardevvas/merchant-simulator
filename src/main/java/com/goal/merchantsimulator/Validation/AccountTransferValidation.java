@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-@FunctionalInterface
 @Component
 public interface AccountTransferValidation extends Function<AccountTransferRequest, Map<Object,Object >> {
 

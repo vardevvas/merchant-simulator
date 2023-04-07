@@ -8,17 +8,6 @@ import java.util.Map;
 
 public class Constant {
 
-//    public GeneralResponse setResponse(GeneralResponse generalResponse, ResponseCode. response) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-//        Class res = Class.forName(response);
-//        Object fasdfa = res.newInstance();
-//        ResponseCode asdfasdf =  (ResponseCode) res.getDeclaredConstructor().newInstance();
-//        res.getDeclaredConstructor().newInstance();
-//        generalResponse.setResponseCode(response.code);
-//        generalResponse.setResponseMessage(ResponseCode.asdfasdf.msg);
-//        generalResponse.setResponseStatus(ResponseCode.response.status);
-//        return generalResponse;
-//    }
-//
     public static class ResponseCode {
 
     public class Success {

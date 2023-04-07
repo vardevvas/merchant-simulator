@@ -1,6 +1,5 @@
 package com.goal.merchantsimulator.service;
 
-import com.goal.merchantsimulator.config.Constant;
 import com.goal.merchantsimulator.dto.inbound.*;
 import com.goal.merchantsimulator.dto.outbound.*;
 import com.goal.merchantsimulator.mapper.EbsMapper;
@@ -10,13 +9,9 @@ import com.goal.merchantsimulator.repository.PayeesRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 
-import static com.goal.merchantsimulator.Validation.BillInquiryValidation.isPayeeIdValid;
+import static com.goal.merchantsimulator.Validation.PayeeValidation.isPayeeIdValid;
 import static com.goal.merchantsimulator.Validation.DefaultValidation.*;
 
 @Service
@@ -26,6 +21,7 @@ public class EbsServices {
     private final TerminalRepo terminalRepo;
     private final CardRepo cardRepo;
     private final EbsMapper ebsMapper;
+    private final CardService cardService;
 
     public PurchaseResponse purchase(PurchaseRequest request) {
         PurchaseResponse response = new PurchaseResponse();
@@ -185,6 +181,7 @@ public class EbsServices {
     public AccountTransferResponse accountTransfer(AccountTransferRequest request) {
         AccountTransferResponse response = new AccountTransferResponse();
         Map<Object, Object> valid = isClientIdValid(terminalRepo).and(isTerminalIdValid(terminalRepo)).and(isSystemTraceAuditNumberValid(terminalRepo)).apply(request);
+        valid = valid.containsValue(0)? cardService.isPanValid(request.getPan(),request.getExpDate(), valid) : valid;
         ebsMapper.accountTransferMapper(request, response);
         response.setResponseCode((Integer) valid.get("code"));
         response.setResponseMessage((String) valid.get("msg"));
