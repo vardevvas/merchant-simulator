@@ -18,9 +18,9 @@ public interface AccountTransferValidation extends Function<AccountTransferReque
 
     static AccountTransferValidation isPanValid(CardRepo cardRepo) {
         Map<Object,Object> res = new HashMap<>();
-        return accountTransferRequest -> {
-            Optional<Card> card = cardRepo.findByPan(accountTransferRequest.getPan());
-            if(accountTransferRequest.getPan() == null || card.isEmpty() || !card.get().getExpDate().equals(accountTransferRequest.getExpDate())){
+        return request -> {
+            Optional<Card> card = cardRepo.findByPan(request.getPan());
+            if(request.getPan() == null || card.isEmpty() || !card.get().getExpDate().equals(request.getExpDate())){
                 res.clear();
                 res.put("code", Constant.ResponseCode.InvalidCard.code);
                 res.put("msg", Constant.ResponseCode.InvalidCard.msg);
@@ -33,9 +33,9 @@ public interface AccountTransferValidation extends Function<AccountTransferReque
     }
 
     default AccountTransferValidation and(AccountTransferValidation other) {
-        return defaultRequest -> {
-            Map<Object,Object > result = this.apply(defaultRequest);
-            return result.containsValue(0) ? other.apply(defaultRequest) : result;
+        return request -> {
+            Map<Object,Object > result = this.apply(request);
+            return result.containsValue(0) ? other.apply(request) : result;
         };
     }
 }
